@@ -141,3 +141,84 @@ age = 25;
 console.log(age);
 age = null;
 console.log(age);
+
+// Type Assertion
+{
+  let value: unknown = "Hello, TypeScript!";
+  let length: number = (value as string).length;
+}
+
+// Type VS Interface
+
+type student = {
+  name: string;
+  age: number;
+};
+
+type studentWithRole = student & { role: number };
+
+const seu_student: studentWithRole = {
+  name: "MAX",
+  age: 20,
+  role: 1,
+};
+
+interface faculty {
+  name: string;
+  age: number;
+}
+
+interface facultyWithRole extends faculty {
+  role: number;
+}
+
+const seu_faculty: facultyWithRole = {
+  name: "ALEX",
+  age: 20,
+  role: 9071,
+};
+
+// Using type
+type NumberArray = number[];
+
+const numbers1: NumberArray = [1, 2, 3, 4];
+
+// Using interface
+interface INumberArray {
+  [index: number]: number;
+}
+
+const numbers2: INumberArray = [5, 6, 7, 8];
+
+console.log(numbers1, numbers2);
+
+// Generic
+
+type GenericArr = Array<number>;
+
+const numArr: GenericArr = [1, 2, 23, 4];
+
+const stringArr: Array<string> = ["max", "alex", "fox"];
+
+type TypePerson = {
+  name: string;
+  age: number;
+};
+
+const people: TypePerson[] = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 },
+];
+
+type GenericArrOfPeople = Array<{ name: string; age: number }>;
+
+const people2: GenericArrOfPeople = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 },
+];
+
+type GenericTuple = [name: string, age: number, isActive: boolean];
+
+const persons: GenericTuple = ["Alice", 25, true];
