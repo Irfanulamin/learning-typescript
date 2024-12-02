@@ -222,3 +222,48 @@ const people2: GenericArrOfPeople = [
 type GenericTuple = [name: string, age: number, isActive: boolean];
 
 const persons: GenericTuple = ["Alice", 25, true];
+
+{
+  interface TStudent<T> {
+    name: string;
+    age: number;
+    scholarship: T;
+  }
+
+  const fahim: TStudent<{
+    type: string;
+    hsc_gpa: number;
+  }> = {
+    name: "Fahim",
+    age: 17,
+    scholarship: {
+      type: "HSC",
+      hsc_gpa: 5.0,
+    },
+  };
+  const mahim: TStudent<{
+    university: string;
+    cgpa: number;
+  }> = {
+    name: "Mahim",
+    age: 22,
+    scholarship: {
+      university: "SEUniversity",
+      cgpa: 3.9,
+    },
+  };
+}
+
+{
+  // Function with Generic
+  const returnValue = <T>(value: T): T => {
+    return value;
+  };
+
+  const getArr = returnValue<number[]>([1, 2, 3, 4, 5]);
+  const getObj = returnValue<{ id: number; name: string }>({
+    id: 2,
+    name: "Irfan",
+  });
+  const getNum = returnValue<number>(12);
+}
