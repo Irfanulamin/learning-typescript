@@ -267,3 +267,84 @@ const persons: GenericTuple = ["Alice", 25, true];
   });
   const getNum = returnValue<number>(12);
 }
+
+{
+  // Generic Constrains
+  const verifyStudent = <T extends { name: string; id: number; email: string }>(
+    param: T
+  ): T => {
+    return param;
+  };
+
+  // Generic Keyof
+  type vehicle = {
+    car: string;
+    boat: string;
+    ship: string;
+  };
+
+  type owner = keyof vehicle; // "car" |  "boat" |  "ship"
+}
+{
+  // TSC Promis
+
+  const createPromise = (): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
+      const data: string = "Hi";
+      data ? resolve(data) : reject("error!");
+    });
+  };
+
+  const showData = async (): Promise<string> => {
+    const data: string = await createPromise();
+    return data;
+  };
+}
+
+{
+  // conditional type
+
+  type IsString<T> = T extends string ? "It's a string" : "Not a string";
+
+  type Result1 = IsString<string>; // "It's a string"
+  type Result2 = IsString<number>; // "Not a string"
+  type Result3 = IsString<"Hello">; // "It's a string"
+  type Result4 = IsString<42>; // "Not a string"
+}
+
+{
+  // mapped types
+  type ConvertToString<T> = {
+    [K in keyof T]: T[K] extends number ? string : T[K];
+  };
+
+  type Original = {
+    id: number;
+    name: string;
+    age: number;
+  };
+
+  type Converted = ConvertToString<Original>;
+  // {
+  //   id: string;
+  //   name: string;
+  //   age: string;
+  // }
+}
+
+{
+  // utility types
+  type PersonInfo = {
+    name: string;
+    age?: number;
+    mom: string;
+    dad: string;
+  };
+
+  // pick
+  type MyInfo = Pick<PersonInfo, "name" | "age">;
+  type ParentInfo = Omit<PersonInfo, "name" | "age">;
+  type requiredInfo = Required<PersonInfo>;
+  type partialInfo = Partial<PersonInfo>;
+  type ReadOnlyInfo = Readonly<PersonInfo>;
+}
